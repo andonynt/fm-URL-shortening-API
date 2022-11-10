@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body class="font-poppins">
+
+  <!--NavBar-->
+
+  <nav class="container mx-auto p-6 lg:px-20 pt-10 pb-10 text-gray-500 lg:flex hidden justify-between">
+
+    <div class="flex items-center space-x-10 font-semibold text-xl">
+      <img src="./images/logo.svg" alt="logo">
+      <a href="/">Features</a>
+      <a href="/">Pricing</a>
+      <a href="/">Resources</a>
+    </div>
+
+    <ul class="flex items-center space-x-10 font-semibold text-xl">
+      <li><a href="/">Login</a></li>
+      <li><a href="/" class="text-white bg-cyan py-3 px-6 rounded-full">Sign Up</a></li>
+    </ul>
+
+  </nav>
+
+  <!--Mobile Navbar-->
+
+  <div class="p-6 flex justify-between items-center lg:hidden">
+    <img src="./images/logo.svg" alt="logo">
+    <img id="rounded-four" class="w-8 h-8" src="./images/reorder-four.svg" alt="reorder-four">
+  </div>
+
+  <div id="mobile-navbar"
+    class="absolute bg-darkViolet text-white font-bold px-6 text-lg right-0 left-0 z-10 mx-auto max-w-[90%] rounded-lg duration-200 -translate-y-full invisible opacity-0 lg:hidden">
+    <!--Hyperlinks-->
+    <ul class="flex flex-col items-center py-8 space-y-8">
+      <li><a href="/">Features</a></li>
+      <li><a href="/">Pricing</a></li>
+      <li><a href="/">Resources</a></li>
+    </ul>
+
+    <!--Login-->
+    <div class="flex flex-col items-center py-8 space-y-8 border-grayishViolet border-t">
+      <a href="/">Login</a>
+      <a class="py-3 w-full text-center bg-cyan rounded-full" href="/">Sign Up</a>
+    </div>
+  </div>
+
+  <!--Hero-->
+
+  <main
+    class="container mx-auto p-6 lg:px-20 pt-20 xl:py-36 lg:py-20 px-6 lg:pl-20 flex flex-col-reverse lg:flex-row lg:justify-between lg:items-center">
+    <!--Left-->
+    <div class="lg:w-1/2 max-w-3xl mt-28 text-center lg:text-left lg:mt-0">
+      <h1 class="xl:text-7xl md:text-5xl text-3xl font-bold xl:leading-[1.1]">More than just shorter links</h1>
+      <p class="font-medium text-lg xl:text-2xl text-gray-500 mt-4">Build your brand's recognition and get detailed
+        insights on how your links are performing.</p>
+      <button
+        class="px-5 py-3 lg:px-7 lg:py-4 mt-6 font-bold text-md lg:text-xl text-lg text-white bg-cyan rounded-full tracking-wider">Get
+        Started</button>
+    </div>
+
+    <!--Right-->
+    <div clasS="translate-x-1/4 scale-150 md:scale-125">
+      <img src="./images/illustration-working.svg" alt="illustration-working">
+    </div>
+  </main>
+
+  <!--Shorten link section-->
+
+  <section class="bg-customGray mt-36 md:mt-28 pb-36">
+    <div class="container mx-auto px-6 lg:px-20">
+      <!--Input-->
+      <div class="input-link bg-darkViolet md:py-7 px-6 relative rounded-lg -translate-y-[50%]">
+        <form id="form"
+          class="py-6 flex flex-col space-y-4 md:space-y-0 md:flex-row items-center space-x-0 md:space-x-6 lg:px-4">
+          <!--Input-->
+          <label for="url" class="flex-1 relative w-full">
+            <input name="url" type="text" class="rounded-lg p-4 w-full text-lg" placeholder="Shorten a link here..."
+              autocomplete="off" />
+            <span id="error-message"
+              class="md:absolute text-customRed text-bold md:-bottom-8 md:left-0 italic pt-4 md:opacity-0 md:invisible hidden">Please
+              add a valid link</span>
+          </label>
+          <!--Submit-->
+          <label for="submit" class="w-full md:w-fit">
+            <input name="submit" type="submit" class="bg-cyan text-white text-lg font-bold px-6 py-4 w-full rounded-lg"
+              value="Shorten It!">
+          </label>
+        </form>
+      </div>
+
+      <!--Shortened links container-->
+      <div id="links" class="-mt-[41px] pb-[60px] space-y-6">
+      </div>
+
+      <!--Shortened link  template-->
+      <template id="template">
+        <div class="text-lg flex bg-white p-6 space-y-4 flex-col rounded-lg lg:flex-row lg:items-center lg:space-y-0">
+          <p class="url flex-1 font-medium text-ellipsis whitespace-nowrap overflow-hidden"></p>
+          <a class="shortened-url text-cyan font-medium border-mobile text-ellipsis whitespace-nowrap overflow-hidden"
+            target="_blank"></a>
+          <button id="deleteLink" class="py-2 px-8 bg-cyan rounded-lg text-white font-bold lg:ml-4">Delete</button>
+        </div>
+      </template>
+
+      <!--Advanced statistics-->
+
+      <div>
+        <h2 class="text-center text-3xl lg:text-4xl font-bold">Advanced statistics</h2>
+        <p class="mt-4 lg:mt-6 mx-auto text-center font-medium max-w-xl text-lg">Track how your links are performing
+          across the web with our advanced statistics dashboard.</p>
+
+        <div
+          class="flex flex-col items-center lg:flex-row lg:items-start mt-20 lg:justify-center lg:space-x-8 lg:mt-24">
+          <!--Brand recognition-->
+          <div
+            class="max-w-[430px] h-fit lg:w-1/3 relative bg-white space-y-4 px-9 pb-9 flex flex-col items-center rounded-lg">
+            <div class="bg-darkViolet p-6 rounded-full absolute lg:left-8 -top-[44px]">
+              <img src="./images/icon-brand-recognition.svg" alt="icon-brand-recognition">
+            </div>
+            <h3 class="w-full pt-16 text-center font-bold text-2xl lg:text-left lg:text-3xl">Brand recognition</h3>
+            <p class="text-center lg:text-left text-lg font-medium">Boost your brand recognition with each click.
+              Generic links don't mean a thing. Branded links help instil confidence in your content.</p>
+          </div>
+
+          <!--Detailed records-->
+          <div
+            class="max-w-[430px] h-fit lg:w-1/3 relative bg-white space-y-4 px-9 pb-9 flex flex-col items-center rounded-lg mt-20 lg:mt-0 2xl:mt-10">
+            <div class="bg-darkViolet p-6 rounded-full absolute lg:text-left lg:left-8 -top-[44px]">
+              <img src="./images/icon-detailed-records.svg" alt="icon-brand-recognition">
+            </div>
+            <h3 class="w-full pt-16 text-center font-bold text-2xl lg:text-left lg:text-3xl">Detailed Records</h3>
+            <p class="text-center lg:text-left text-lg font-medium">Gain insights into who is clicking your links.
+              Knowing when and where people engage with your content helps inform better decisions.</p>
+          </div>
+
+          <!--Fully customizable-->
+          <div
+            class="max-w-[430px] h-fit lg:w-1/3 relative bg-white space-y-4 px-9 pb-9 flex flex-col items-center rounded-lg mt-20 lg:mt-0 2xl:mt-20">
+            <div class="bg-darkViolet p-6 rounded-full absolute lg:left-8 -top-[44px]">
+              <img src="./images/icon-fully-customizable.svg" alt="icon-brand-recognition">
+            </div>
+            <h3 class="w-full pt-16 text-center font-bold text-2xl lg:text-left lg:text-3xl">Fully Customizable</h3>
+            <p class="text-center lg:text-left text-lg font-medium">Improve brand awareness and content discoverability
+              through customizable links, supercharging audience engagement.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!--Call to action-->
+
+  <section id="cta" class="call-to-action bg-darkViolet py-20 flex flex-col items-center space-y-8 lg:spaxe-y-10">
+    <h4 class="text-white text-center text-2xl md:text-3xl lg:text-5xl font-bold">Boost your links today</h4>
+    <button class="bg-cyan text-white font-bold tracking-wide px-10 py-4 text-xl rounded-full">Get Started</button>
+  </section>
+
+  <!--Footer-->
+
+  <footer class="bg-veryDarkBlue">
+    <div class="container mx-auto px-6 py-14 lg:px-20 flex flex-col xl:flex-row">
+
+      <!--Logo-->
+      <div class="xl:w-1/3 h-fit w-full">
+        <img class="mx-auto xl:m-0" src="./images/logo-white.svg" alt="logo">
+      </div>
+
+      <!--Links-->
+      <div
+        class="text-white text-center xl:text-left text-xl pt-8 flex-1 space-y-10 flex flex-col items-center xl:items-start xl:pt-0 xl:flex-row xl:justify-between xl:space-y-0">
+        <div>
+          <p class="text-white font-bold">Features</p>
+          <ul class="pt-2 space-y-2 text-customGray">
+            <li>Link Shortening</li>
+            <li>Branded Links</li>
+            <li>Analytics</li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-white font-bold">Resources</p>
+          <ul class="pt-2 space-y-2 text-customGray">
+            <li>Blog</li>
+            <li>Developers</li>
+            <li>Support</li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="text-white font-bold">Company</p>
+          <ul class="pt-2 space-y-2 text-customGray">
+            <li>About</li>
+            <li>Our team</li>
+            <li>Careers</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+
+        <!--Icons-->
+        <div>
+          <ul class="flex space-x-8">
+            <li><a href=""><img src="./images/icon-facebook.svg" alt="icon-facebook"></a></li>
+            <li><a href=""><img src="./images/icon-twitter.svg" alt="icon-twitter"></a></li>
+            <li><a href=""><img src="./images/icon-pinterest.svg" alt="icon-pinterest"></a></li>
+            <li><a href=""><img src="./images/icon-instagram.svg" alt="icon-instagram"></a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="attribution mt">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="https://github.com/andonynt" target="_blank">Andony Nunnez</a>.
+  </div>
+
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
+  <script src="./js/main.js" type="module"></script>
+</body>
+
+</html>
