@@ -36,9 +36,9 @@ const URLshortener = () => {
     e.preventDefault();
     try {
       const url = $form.url.value;
-      let response = await axios.get(`https://api.shrtco.de/v2/shorten?url=${url}`),
-        results = await response.data.result;
-
+      const response = await fetch(`https://api.shrtco.de/v2/shorten?url=${url}`),
+        json = await response.json(),
+        results = await json.result;
       const exists = links.find(link => link.original_link === url);
 
       if (exists) {
