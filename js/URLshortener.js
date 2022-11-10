@@ -51,6 +51,7 @@ const URLshortener = () => {
         full_short_link: results.full_short_link
       }
       links.push(link);
+      $form.url.value = '';
 
       saveLocalStorage();
       render();
@@ -58,7 +59,6 @@ const URLshortener = () => {
     } catch (error) {
       /* Handle error */
       $errorMessage.classList.remove('hidden', 'md:opacity-0', 'md:invisible');
-
       setTimeout(() => {
         $errorMessage.classList.add('hidden', 'md:opacity-0', 'md:invisible');
       }, 2000);
